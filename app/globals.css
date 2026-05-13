@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --background: #fbfcfd;
+  --foreground: #172033;
+  --muted: #667085;
+  --line: #d9e0ea;
+  --brand: #0f766e;
+  --brand-strong: #0f4f4a;
+  --accent: #c2410c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.08), transparent 34rem),
+    linear-gradient(180deg, #ffffff 0%, var(--background) 48%, #ffffff 100%);
+  color: var(--foreground);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(15, 118, 110, 0.16);
+}
+
+.reveal {
+  animation: section-rise 720ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.reveal-delay {
+  animation-delay: 120ms;
+}
+
+.clay-card {
+  transform-style: preserve-3d;
+}
+
+.clay-card:hover {
+  box-shadow:
+    0 22px 70px rgba(15, 118, 110, 0.12),
+    0 0 0 1px rgba(20, 184, 166, 0.14);
+}
+
+.page-wipe {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(100deg, #0f766e, #f97316, #8bc923);
+  animation: page-wipe 500ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.hero-zoom {
+  animation: hero-zoom 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  transform-origin: center;
+}
+
+.hero-copy {
+  animation: hero-copy 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 160ms both;
+}
+
+@keyframes page-wipe {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-102%);
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes hero-copy {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes section-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.running-vector {
+  height: auto;
+  width: 100%;
+}
+
+.runner-arm-front,
+.runner-arm-back,
+.runner-leg-front,
+.runner-leg-back {
+  transform-box: fill-box;
+  transform-origin: top center;
+}
+
+.runner-mark {
+  animation: runner-travel 1.25s ease-in-out infinite;
+}
+
+.runner-arm-front,
+.runner-leg-back {
+  animation: runner-swing-a 620ms ease-in-out infinite;
+}
+
+.runner-arm-back,
+.runner-leg-front {
+  animation: runner-swing-b 620ms ease-in-out infinite;
+}
+
+.track-line {
+  stroke-dasharray: 10 10;
+  animation: track-dash 900ms linear infinite;
+  opacity: 0.55;
+}
+
+@keyframes runner-travel {
+  0%,
+  100% {
+    transform: translateX(-8px) translateY(0);
+  }
+
+  50% {
+    transform: translateX(8px) translateY(-2px);
+  }
+}
+
+@keyframes track-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+@keyframes runner-swing-a {
+  0%,
+  100% {
+    transform: rotate(-16deg);
+  }
+
+  50% {
+    transform: rotate(18deg);
+  }
+}
+
+@keyframes runner-swing-b {
+  0%,
+  100% {
+    transform: rotate(18deg);
+  }
+
+  50% {
+    transform: rotate(-16deg);
+  }
+}
+
+*:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.38);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
