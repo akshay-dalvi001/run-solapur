@@ -18,7 +18,8 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(15, 118, 110, 0.08), transparent 34rem),
+    radial-gradient(circle at top left, rgba(139, 201, 35, 0.14), transparent 28rem),
+    radial-gradient(circle at 85% 12%, rgba(249, 115, 22, 0.1), transparent 24rem),
     linear-gradient(180deg, #ffffff 0%, var(--background) 48%, #ffffff 100%);
   color: var(--foreground);
   font-family:
@@ -49,15 +50,6 @@ body {
     0 0 0 1px rgba(20, 184, 166, 0.14);
 }
 
-.page-wipe {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: linear-gradient(100deg, #0f766e, #f97316, #8bc923);
-  animation: page-wipe 500ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
-}
-
 .hero-zoom {
   animation: hero-zoom 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   transform-origin: center;
@@ -65,16 +57,6 @@ body {
 
 .hero-copy {
   animation: hero-copy 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 160ms both;
-}
-
-@keyframes page-wipe {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-102%);
-  }
 }
 
 @keyframes hero-zoom {
@@ -96,6 +78,215 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 10% 0%, rgba(139, 201, 35, 0.18), transparent 16rem),
+      radial-gradient(circle at 100% 8%, rgba(249, 115, 22, 0.13), transparent 14rem),
+      linear-gradient(180deg, #ffffff 0%, #f7faf7 46%, #ffffff 100%);
+  }
+
+
+
+  h1 {
+    font-size: clamp(1.85rem, 10vw, 2.7rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  h2 {
+    font-size: clamp(1.22rem, 6vw, 1.65rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  h3 {
+    font-size: 1rem !important;
+    line-height: 1.12 !important;
+  }
+
+  p {
+    font-size: 0.875rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .max-w-7xl {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+
+  .gap-10 {
+    gap: 0.9rem !important;
+  }
+
+  .gap-8 {
+    gap: 0.8rem !important;
+  }
+
+  .gap-6,
+  .gap-5,
+  .gap-4 {
+    gap: 0.6rem !important;
+  }
+
+  .gap-3 {
+    gap: 0.5rem !important;
+  }
+
+  .gap-2 {
+    gap: 0.4rem !important;
+  }
+
+  .p-8,
+  .p-7,
+  .p-6,
+  .p-5 {
+    padding: 0.9rem !important;
+  }
+
+  .p-4 {
+    padding: 0.78rem !important;
+  }
+
+  .px-6,
+  .px-5 {
+    padding-left: 0.9rem !important;
+    padding-right: 0.9rem !important;
+  }
+
+  .px-4 {
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+
+  .py-3 {
+    padding-top: 0.62rem !important;
+    padding-bottom: 0.62rem !important;
+  }
+
+  .py-2\.5 {
+    padding-top: 0.52rem !important;
+    padding-bottom: 0.52rem !important;
+  }
+
+  .rounded-\[2rem\],
+  .rounded-\[1\.5rem\] {
+    border-radius: 0.95rem !important;
+  }
+
+  .rounded-2xl {
+    border-radius: 0.8rem !important;
+  }
+
+  .min-h-\[32rem\] {
+    min-height: 18rem !important;
+  }
+
+  .min-h-\[88vh\] {
+    min-height: 68vh !important;
+  }
+
+
+
+  .mt-10,
+  .mt-9,
+  .mt-8 {
+    margin-top: 0.9rem !important;
+  }
+
+  .mt-7,
+  .mt-6,
+  .mt-5 {
+    margin-top: 0.65rem !important;
+  }
+
+  .mt-4,
+  .mt-3 {
+    margin-top: 0.5rem !important;
+  }
+
+  .text-8xl,
+  .text-7xl {
+    font-size: 3.15rem !important;
+  }
+
+  .text-6xl,
+  .text-5xl {
+    font-size: 2.35rem !important;
+  }
+
+  .text-4xl {
+    font-size: 1.85rem !important;
+  }
+
+  .text-3xl {
+    font-size: 1.45rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1.2rem !important;
+  }
+
+  .text-xl {
+    font-size: 1rem !important;
+  }
+
+  .text-lg {
+    font-size: 0.92rem !important;
+  }
+
+  .text-base {
+    font-size: 0.875rem !important;
+  }
+
+  .text-sm {
+    font-size: 0.78rem !important;
+  }
+
+  .text-xs {
+    font-size: 0.68rem !important;
+  }
+
+  .leading-8,
+  .leading-7,
+  .leading-6 {
+    line-height: 1.45 !important;
+  }
+
+  .size-14 {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+  }
+
+  .size-12 {
+    width: 2.45rem !important;
+    height: 2.45rem !important;
+  }
+
+  .size-11,
+  .size-10 {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+  }
+
+  .size-9,
+  .size-8 {
+    width: 1.9rem !important;
+    height: 1.9rem !important;
+  }
+
+  .flex-col {
+    row-gap: 0.55rem !important;
+  }
+
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12) !important;
   }
 }
 

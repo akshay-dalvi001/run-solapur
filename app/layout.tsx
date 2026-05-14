@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { InitialLoader } from "@/components/InitialLoader";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -15,6 +16,11 @@ export const metadata: Metadata = {
   },
   description:
     "Official event story for Challenger Sports Foundation, Solapur marathon initiatives, fitness and endurance sports, and the Run for Nation movement.",
+  icons: {
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
   robots: {
     index: true,
     follow: true,
@@ -28,7 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-IN">
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <InitialLoader />
+        {children}
+      </body>
     </html>
   );
 }

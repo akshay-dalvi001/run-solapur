@@ -8,6 +8,9 @@ export const primaryEvent = {
   location: "Solapur, Maharashtra, India",
   supportPhone: "+91 91758 28203",
   whatsappNumber: "919175828203",
+  secondaryPhone: "+91 73505 13197",
+  secondaryWhatsappNumber: "917350513197",
+  secondaryContactName: "Chandrashekhar Gaikwad",
   canonicalPath: "/",
   description:
     "A premium event story for Challenger Sports Foundation, showcasing Solapur marathon initiatives, the Run for Nation movement, and the foundation's work in fitness and endurance sports.",
@@ -244,6 +247,9 @@ export const akkalkotEvent = {
   titleSponsor: "श्री स्वामी समर्थ अन्नछत्र मंडळ ट्रस्ट अक्कलकोट.",
   supportPhone: "+91 91758 28203",
   whatsappNumber: "919175828203",
+  secondaryPhone: "+91 73505 13197",
+  secondaryWhatsappNumber: "917350513197",
+  secondaryContactName: "Chandrashekhar Gaikwad",
   registrationUrl:
     "https://jointhevent.com/events/akkalkot-10k-bhakti-run-season-1-535232",
   banner: {

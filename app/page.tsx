@@ -36,6 +36,13 @@ const iconMap = {
   Facebook,
 };
 
+const factCardStyles = [
+  "border-lime-200 bg-lime-50",
+  "border-teal-200 bg-teal-50",
+  "border-orange-200 bg-orange-50",
+  "border-sky-200 bg-sky-50",
+];
+
 export const metadata: Metadata = {
   title: "Run Solapur | Challenger Sports Foundation",
   description:
@@ -75,7 +82,6 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="page-wipe" aria-hidden="true" />
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -97,7 +103,13 @@ export default function HomePage() {
         <Sponsors event={event} />
         <SocialFooter event={event} />
       </main>
-      <ContactEngagement phone={event.supportPhone} whatsappNumber={event.whatsappNumber} />
+      <ContactEngagement
+        phone={event.supportPhone}
+        whatsappNumber={event.whatsappNumber}
+        secondaryPhone={event.secondaryPhone}
+        secondaryWhatsappNumber={event.secondaryWhatsappNumber}
+        secondaryContactName={event.secondaryContactName}
+      />
     </>
   );
 }
@@ -114,17 +126,18 @@ function Header({ event }: { event: EventPageData }) {
           className="group flex items-center gap-3 rounded-full py-1 pr-3 transition hover:bg-slate-50"
           aria-label="Run Solapur home"
         >
-          <span className="relative size-12 overflow-hidden rounded-full border border-slate-200 bg-white shadow-sm">
+          <span className="relative grid size-12 place-items-center border border-slate-200 bg-white shadow-sm">
             <Image
-              src="/challenger-logo.svg"
+              src="/logo.jpg"
               alt="Challenger Runners Group Solapur logo"
-              fill
+              width={44}
+              height={44}
               sizes="48px"
-              className="object-cover"
+              className="object-contain"
             />
           </span>
           <span className="leading-tight">
-            <span className="block text-sm font-bold tracking-tight text-slate-950">
+            <span className="block text-2xl sm:text-sm font-bold tracking-tight text-slate-950">
               Run Solapur
             </span>
             <span className="hidden text-xs font-medium text-slate-500 sm:block">
@@ -158,13 +171,24 @@ function Header({ event }: { event: EventPageData }) {
 function Hero({ event }: { event: EventPageData }) {
   return (
     <section id="top" className="relative overflow-hidden border-b border-slate-200 bg-white">
+      <div className="pointer-events-none absolute -right-20 top-24 z-0 opacity-20 grayscale mix-blend-multiply sm:-right-24 md:-top-10 lg:-right-10">
+        <Image
+          src="/logo.jpg"
+          alt=""
+          width={800}
+          height={800}
+          className="h-auto w-[300px] object-contain sm:w-[500px] lg:w-[800px]"
+        />
+      </div>
       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-50 to-transparent" />
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-24">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-24">
         <div className="relative z-10 reveal">
-          <p className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3 py-1.5 text-sm font-semibold text-teal-800">
-            <Flag aria-hidden="true" className="size-4" />
-            {event.hero.eyebrow}
-          </p>
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-teal-200 bg-gradient-to-r from-teal-50 to-white px-4 py-2 text-sm font-bold text-teal-900 shadow-sm ring-1 ring-inset ring-teal-500/10">
+            <div className="flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-teal-500 to-teal-700 text-white shadow-inner">
+              <Flag aria-hidden="true" className="size-3" />
+            </div>
+            <span className="tracking-wide">{event.hero.eyebrow}</span>
+          </div>
           <h1 className="mt-7 max-w-4xl text-4xl font-bold tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
             {event.hero.title}
           </h1>
@@ -174,10 +198,10 @@ function Hero({ event }: { event: EventPageData }) {
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">
             {event.hero.summary}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
               href="#milestones"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-teal-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-teal-800"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-teal-600 to-teal-800 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-teal-900/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-teal-900/30"
             >
               Explore Event Story
               <ArrowDown aria-hidden="true" className="size-4" />
@@ -188,22 +212,24 @@ function Hero({ event }: { event: EventPageData }) {
               )}`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-300 hover:bg-teal-50"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-200 bg-white/80 px-8 py-4 text-sm font-bold text-slate-900 shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:border-teal-300 hover:bg-teal-50 hover:shadow-md"
             >
               Become a Sponsor
               <Medal aria-hidden="true" className="size-4" />
             </a>
           </div>
-          <dl className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {event.facts.map((fact) => (
+          <dl className="mt-10 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
+            {event.facts.map((fact, index) => (
               <div
                 key={fact.label}
-                className="rounded-2xl border border-slate-200 bg-white/84 p-4 shadow-sm"
+                className={`rounded-2xl border p-3 shadow-sm sm:p-4 ${factCardStyles[index % factCardStyles.length]}`}
               >
-                <dt className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+                <dt className="text-[0.65rem] font-bold uppercase tracking-[0.12em] text-slate-600 sm:text-xs sm:tracking-[0.16em]">
                   {fact.label}
                 </dt>
-                <dd className="mt-1 text-lg font-bold text-slate-950">{fact.value}</dd>
+                <dd className="mt-1 text-base font-black text-slate-950 sm:text-lg">
+                  {fact.value}
+                </dd>
               </div>
             ))}
           </dl>
@@ -218,11 +244,13 @@ function UpcomingEvent({ event }: { event: EventPageData }) {
   const featured = event.featuredEvent;
 
   return (
-    <section className="border-b border-slate-200 bg-slate-50 py-10 sm:py-14">
+    <section className="relative overflow-hidden border-y border-orange-200 bg-gradient-to-br from-orange-50 via-lime-50 to-teal-50 py-12">
+      <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-orange-200/30 blur-3xl" />
+      <div className="absolute bottom-0 left-0 h-40 w-40 rounded-full bg-teal-200/40 blur-3xl" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link
           href={featured.href}
-          className="clay-card group grid overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/10 lg:grid-cols-[0.9fr_1.1fr]"
+          className="clay-card group relative grid overflow-hidden rounded-[2rem] border border-orange-200 bg-white shadow-xl shadow-orange-900/8 ring-1 ring-white/70 transition duration-200 hover:-translate-y-1 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/10 lg:grid-cols-[0.9fr_1.1fr]"
         >
           <div className="relative min-h-72 overflow-hidden bg-slate-100">
             <Image
@@ -233,7 +261,10 @@ function UpcomingEvent({ event }: { event: EventPageData }) {
               className="object-cover transition duration-500 group-hover:scale-[1.04]"
             />
           </div>
-          <div className="p-6 sm:p-8">
+          <div className="relative p-6 sm:p-8">
+            <div className="mb-4 inline-flex rounded-full bg-orange-500 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-white shadow-sm">
+              Registration Open
+            </div>
             <p className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1.5 text-sm font-bold text-teal-800">
               <Flag aria-hidden="true" className="size-4" />
               Upcoming Event
@@ -257,8 +288,8 @@ function UpcomingEvent({ event }: { event: EventPageData }) {
                 <dd className="mt-1 font-bold text-slate-950">{featured.time}</dd>
               </div>
             </dl>
-            <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white transition group-hover:bg-teal-800">
-              View Event Details
+            <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-3 text-sm font-black text-slate-950 shadow-lg shadow-orange-900/15 transition group-hover:bg-teal-700 group-hover:text-white">
+              Register / View Details
               <ChevronRight aria-hidden="true" className="size-4" />
             </span>
           </div>
@@ -425,8 +456,22 @@ function SectionShell({
   intro?: string;
   children: React.ReactNode;
 }) {
+  const sectionBackgrounds: Record<string, string> = {
+    story: "bg-white",
+    milestones: "bg-gradient-to-br from-sky-50 via-white to-lime-50",
+    leadership: "bg-gradient-to-br from-white via-teal-50 to-white",
+    safety: "bg-gradient-to-br from-lime-50 via-white to-orange-50",
+    initiatives: "bg-gradient-to-br from-orange-50 via-white to-sky-50",
+    activity: "bg-gradient-to-br from-slate-50 via-white to-teal-50",
+    solapur: "bg-gradient-to-br from-teal-50 via-white to-lime-50",
+    objectives: "bg-gradient-to-br from-white via-sky-50 to-orange-50",
+  };
+
   return (
-    <section id={id} className="scroll-mt-24 py-14 sm:py-18">
+    <section
+      id={id}
+      className={`scroll-mt-24 border-y border-white/70 py-12 ${sectionBackgrounds[id] ?? "bg-white"}`}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="reveal max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-teal-700">
@@ -459,11 +504,15 @@ function Foundation({ event }: { event: EventPageData }) {
             running culture in Solapur.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {event.intro.map((paragraph, index) => (
             <article
               key={paragraph}
-              className="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm"
+              className={`rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm ${
+                index === 0
+                  ? "col-span-2 flex flex-col items-center text-center sm:col-span-1 sm:items-start sm:text-left"
+                  : "col-span-1"
+              }`}
             >
               <span className="grid size-9 place-items-center rounded-full bg-slate-100 text-sm font-bold text-slate-800">
                 {index + 1}
@@ -485,11 +534,11 @@ function Milestones({ event }: { event: EventPageData }) {
       title="The annual freedom-number running initiative."
       intro="Major activities are organized chronologically so sponsors, runners, media, and civic partners can understand the foundation’s progression quickly."
     >
-      <div className="grid gap-4 lg:grid-cols-5">
+      <div className="flex gap-4 overflow-x-auto pb-4 lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {event.milestones.map((milestone) => (
           <article
             key={milestone.year}
-            className={`rounded-[1.5rem] border p-5 shadow-sm ${
+            className={`w-[42vw] min-w-[160px] shrink-0 rounded-[1.5rem] border p-5 shadow-sm sm:w-[240px] lg:w-auto lg:shrink-0 ${
               "featured" in milestone && milestone.featured
                 ? "border-teal-300 bg-teal-50 shadow-teal-100/70"
                 : "border-slate-200 bg-white"
@@ -519,7 +568,7 @@ function Milestones({ event }: { event: EventPageData }) {
 
 function WorldRecord({ event }: { event: EventPageData }) {
   return (
-    <section className="border-y border-slate-200 bg-white py-14 sm:py-18">
+    <section className="border-y border-orange-200 bg-gradient-to-br from-orange-50 via-white to-lime-50 py-12">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
         <div className="reveal rounded-[2rem] border border-orange-200 bg-orange-50 p-7 shadow-sm">
           <p className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-sm font-bold text-orange-800 shadow-sm">
@@ -591,16 +640,16 @@ function Safety({ event }: { event: EventPageData }) {
       title="A disciplined event ecosystem for runner confidence."
       intro="The event is conducted as per standard guidelines and safety protocols, with practical support systems planned around runner safety and smooth race completion."
     >
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {event.safety.map((item) => (
           <div
             key={item}
-            className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+            className="flex items-start gap-4 rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md"
           >
-            <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-teal-50 text-teal-700">
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-teal-50 text-teal-700">
               <Check aria-hidden="true" className="size-4" />
             </span>
-            <p className="text-sm font-semibold leading-6 text-slate-700">{item}</p>
+            <p className="mt-1 text-sm font-semibold leading-6 text-slate-700">{item}</p>
           </div>
         ))}
       </div>
@@ -619,10 +668,12 @@ function Initiatives({ event }: { event: EventPageData }) {
         {event.initiatives.map((item) => (
           <article
             key={item}
-            className="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            className="flex items-start gap-4 rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-orange-300 hover:shadow-md"
           >
-            <Sparkles aria-hidden="true" className="size-6 text-orange-700" />
-            <h3 className="mt-4 text-base font-bold leading-6 text-slate-950">{item}</h3>
+            <span className="grid size-10 shrink-0 place-items-center rounded-full bg-orange-50 text-orange-700">
+              <Sparkles aria-hidden="true" className="size-5" />
+            </span>
+            <h3 className="mt-2 text-base font-bold leading-6 text-slate-950">{item}</h3>
           </article>
         ))}
       </div>
@@ -669,11 +720,12 @@ function MarathonAndSolapur({ event }: { event: EventPageData }) {
             <MapPin aria-hidden="true" className="size-5 text-teal-700" />
             Solapur supportive environment
           </h3>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {event.solapur.map((item) => (
-              <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-semibold leading-6 text-slate-700">{item}</p>
-              </div>
+              <p key={item} className="flex gap-4 rounded-[1.5rem] border border-slate-100 bg-slate-50 p-5 text-sm font-semibold text-slate-700">
+                <Check aria-hidden="true" className="size-5 shrink-0 text-teal-700" />
+                {item}
+              </p>
             ))}
           </div>
         </article>
@@ -689,16 +741,16 @@ function Objectives({ event }: { event: EventPageData }) {
       eyebrow="Objectives"
       title="Clear goals for event standards, youth guidance, and community participation."
     >
-      <div className="grid gap-3 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         {event.objectives.map((objective) => (
           <div
             key={objective}
-            className="flex gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+            className="flex items-start gap-4 rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md"
           >
-            <span className="grid size-7 shrink-0 place-items-center rounded-full bg-teal-700 text-white">
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-teal-700 text-white">
               <Check aria-hidden="true" className="size-4" />
             </span>
-            <p className="text-sm font-semibold leading-6 text-slate-700">{objective}</p>
+            <p className="mt-1 text-sm font-semibold leading-6 text-slate-700">{objective}</p>
           </div>
         ))}
       </div>
@@ -708,7 +760,7 @@ function Objectives({ event }: { event: EventPageData }) {
 
 function Sponsors({ event }: { event: EventPageData }) {
   return (
-    <section id="sponsors" className="scroll-mt-24 bg-slate-950 py-14 text-white sm:py-18">
+    <section id="sponsors" className="scroll-mt-24 bg-slate-950 py-12 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="reveal grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
@@ -741,6 +793,13 @@ function Sponsors({ event }: { event: EventPageData }) {
                 <Phone aria-hidden="true" className="size-4" />
                 {event.supportPhone}
               </a>
+              <a
+                href={`tel:${event.secondaryPhone.replace(/\s/g, "")}`}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/8 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/12"
+              >
+                <Phone aria-hidden="true" className="size-4" />
+                {event.secondaryPhone}
+              </a>
             </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -769,13 +828,14 @@ function SocialFooter({ event }: { event: EventPageData }) {
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <div className="flex items-center gap-3">
-              <span className="relative size-14 overflow-hidden rounded-full border border-slate-200 bg-white shadow-sm">
+              <span className="relative grid size-14 place-items-center border border-slate-200 bg-white shadow-sm">
                 <Image
-                  src="/challenger-logo.svg"
+                  src="/logo.jpg"
                   alt="Challenger Runners Group Solapur logo"
-                  fill
+                  width={52}
+                  height={52}
                   sizes="56px"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </span>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-teal-700">
@@ -827,6 +887,17 @@ function SocialFooter({ event }: { event: EventPageData }) {
           >
             <MessageCircle aria-hidden="true" className="size-4" />
             WhatsApp Support
+          </a>
+          <a
+            href={`https://wa.me/${event.secondaryWhatsappNumber}?text=${encodeURIComponent(
+              "Hello Chandrashekhar Gaikwad, I would like support for Run Solapur.",
+            )}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-teal-300 bg-white px-4 py-3 text-sm font-bold text-slate-950 transition hover:bg-teal-50 sm:col-span-2"
+          >
+            <MessageCircle aria-hidden="true" className="size-4" />
+            {event.secondaryContactName}: {event.secondaryPhone}
           </a>
         </div>
         <div className="mt-10 flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
