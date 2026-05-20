@@ -228,7 +228,7 @@ export const primaryEvent = {
     date: "Sunday, 26 July 2026",
     time: "5:30 AM onwards",
     href: "/events/akkalkot-10k-bhakti-run-season-1",
-    image: "/Akkalkot-Marathon-Image.JPG.jpeg",
+    image: "/akkalkot-run-solapur-marathon.jpg",
     summary:
       "A Bhakti Run connecting fitness with spirituality through 3 KM, 5 KM, and 10 KM race categories in Akkalkot.",
   },
@@ -253,7 +253,7 @@ export const akkalkotEvent = {
   registrationUrl:
     "https://jointhevent.com/events/akkalkot-10k-bhakti-run-season-1-535232",
   banner: {
-    src: "/Akkalkot-Marathon-Image.JPG.jpeg",
+    src: "/akkalkot-run-solapur-marathon.jpg",
     alt: "Akkalkot 10K Bhakti Run Season 1 event banner",
   },
   description:

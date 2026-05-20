@@ -252,13 +252,13 @@ function UpcomingEvent({ event }: { event: EventPageData }) {
           href={featured.href}
           className="clay-card group relative grid overflow-hidden rounded-[2rem] border border-orange-200 bg-white shadow-xl shadow-orange-900/8 ring-1 ring-white/70 transition duration-200 hover:-translate-y-1 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/10 lg:grid-cols-[0.9fr_1.1fr]"
         >
-          <div className="relative min-h-72 overflow-hidden bg-slate-100 aspect-square">
+          <div className="relative min-h-72 overflow-hidden bg-amber-100">
             <Image
               src={featured.image}
               alt={`${featured.title} banner`}
               fill
               sizes="(min-width: 1024px) 42vw, 100vw"
-              className="object-cover transition duration-500 aspect-square group-hover:scale-[1.04]"
+              className="object-contain transition duration-500 group-hover:scale-[1.04]"
             />
           </div>
           <div className="relative p-6 sm:p-8">
