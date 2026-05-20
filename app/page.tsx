@@ -89,8 +89,8 @@ export default function HomePage() {
       />
       <Header event={event} />
       <main>
-        <Hero event={event} />
         <UpcomingEvent event={event} />
+        <Hero event={event} />
         <Foundation event={event} />
         <Milestones event={event} />
         <WorldRecord event={event} />
@@ -252,20 +252,20 @@ function UpcomingEvent({ event }: { event: EventPageData }) {
           href={featured.href}
           className="clay-card group relative grid overflow-hidden rounded-[2rem] border border-orange-200 bg-white shadow-xl shadow-orange-900/8 ring-1 ring-white/70 transition duration-200 hover:-translate-y-1 hover:border-teal-300 hover:shadow-2xl hover:shadow-teal-900/10 lg:grid-cols-[0.9fr_1.1fr]"
         >
-          <div className="relative min-h-72 overflow-hidden bg-slate-100">
+          <div className="relative min-h-72 overflow-hidden bg-slate-100 aspect-square">
             <Image
               src={featured.image}
               alt={`${featured.title} banner`}
               fill
               sizes="(min-width: 1024px) 42vw, 100vw"
-              className="object-cover transition duration-500 group-hover:scale-[1.04]"
+              className="object-cover transition duration-500 aspect-square group-hover:scale-[1.04]"
             />
           </div>
           <div className="relative p-6 sm:p-8">
             <div className="mb-4 inline-flex rounded-full bg-orange-500 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-white shadow-sm">
               Registration Open
             </div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1.5 text-sm font-bold text-teal-800">
+            <p className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1.5 text-sm font-bold text-teal-800 ml-4 relative top-0.5">
               <Flag aria-hidden="true" className="size-4" />
               Upcoming Event
             </p>
